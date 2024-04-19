@@ -2,8 +2,8 @@
 
 @section('content') {{-- abre una seccion --}}
     <div class="container grid md:grid-cols-2 grid-cols-1 gap-4">
-        <div class="flex justify-center min-h-full ">
-            <div class="sm:max-h-96 max-h-full rounded shadow-lg shadow-gray-300 xs:min-w-full min-w-96 flex-col justify-center items-center px-6 py-12 lg:px-8 md:mt-20">
+        <div class="flex justify-center items-center min-h-full ">
+            <div class="sm:max-h-auto max-h-full rounded shadow-lg shadow-gray-300 xs:min-w-full min-w-96 flex-col justify-center items-center px-6 py-12 lg:px-8 md:mt-20">
                 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                     <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Mis tareas</h2>
                 </div>

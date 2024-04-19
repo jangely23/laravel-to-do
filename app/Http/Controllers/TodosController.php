@@ -26,7 +26,7 @@ class TodosController extends Controller
         $todo->title = $request->title;
         $todo->save();
 
-        return redirect()->route('nombre-todos')->with('success', 'Tarea creada correctamente');
+        return redirect()->route('nombre-todos')->with('success', 'Tarea creada correctamente!');
     }
 
     public function index(){
@@ -39,13 +39,20 @@ class TodosController extends Controller
         return view('tareas.show', [ 'tarea' => $todo ]);
     }
 
-    public function update(){
-        $todos = Todo::all();
-        return view('tareas.index', [ 'tareas' => $todos ]);
+    public function update(Request $request, $id){
+        $todo = Todo::find($id);
+        $todo->title = $request->title;
+        $todo->save();
+
+        /* dd($todo); */// permite hacer debug
+
+        return redirect()->route('nombre-todos')->with('success', 'Tarea actualizada!');
     }
 
-    public function destroy(){
-        $todos = Todo::all();
-        return view('tareas.index', [ 'tareas' => $todos ]);
+    public function destroy($id){
+        $todo = Todo::find($id);
+        $todo->delete();
+
+        return redirect()->route('nombre-todos')->with('success', 'Tarea eliminada exitosamente!');
     }
 }
