@@ -48,8 +48,9 @@
                       </div>
                       <div class="hidden xs:ml-6 sm:block mx-auto items-center justify-center">
                         <div class="flex space-x-4 ">
-                          <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Tareas</a>
-                          <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Categorias</a>
+                          <a href="{{ route('inicio') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Inicio</a>
+                          <a href="{{ route('nombre-todos') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Tareas</a>
+                          <a href="{{ route('categorias.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Categorias</a>
                         </div>
                       </div>
                     </div>
@@ -69,8 +70,9 @@
                 <!-- Mobile menu, show/hide based on menu state. -->
                 <div class="sm:hidden" id="mobile-menu">
                   <div class="space-y-1 px-2 pb-3 pt-2">
-                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Tareas</a>
-                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Categorias</a>
+                    <a href="{{ route('inicio') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Tareas</a>
+                    <a href="{{ route('nombre-todos') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Tareas</a>
+                    <a href="{{ route('categorias.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Categorias</a>
                   </div>
                 </div>
               </nav>

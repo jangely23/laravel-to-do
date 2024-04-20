@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
 use Illuminate\Http\Request;
+use App\Models\Categoria;
 
 class CategoriaController extends Controller
 {
@@ -13,17 +13,21 @@ class CategoriaController extends Controller
     public function index()
     {
         $categorias = Categoria::all();
+        
+        if($categorias->isEmpty()){
+            $categorias=false;
+        }
 
-        return view('categories.index', ['categorias', $categorias]);
+        return view('categorias.index', ['categorias' => $categorias]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-/*     public function create()
+    public function create()
     {
         //
-    } */
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +39,7 @@ class CategoriaController extends Controller
             'color' => 'required|max:7'
         ]);
 
-        $categoria = new Categoria();
+        $categoria = new Categoria;
         $categoria->name = $request->name;
         $categoria->color = $request->color;
         $categoria->save();
@@ -54,7 +58,10 @@ class CategoriaController extends Controller
         return view('categorias.show', ['categoria'=> $categoria]);
     }
 
-   
+    public function edit(string $id)
+    {
+        //
+    }
 
     /**
      * Update the specified resource in storage.

@@ -1,7 +1,13 @@
 @extends('app') {{-- Importa la plantilla base --}}
 
 @section('content') {{-- abre una seccion --}}
-    <div class="container grid md:grid-cols-2 grid-cols-1 gap-4">
+
+    @if ($tareas)
+        <div class="container grid md:grid-cols-2 grid-cols-1 gap-4">
+    @else
+        <div class="container min-w-full">
+    @endif
+    
         <div class="flex justify-center items-center min-h-full ">
             <div class="sm:max-h-auto max-h-full rounded shadow-lg shadow-gray-300 xs:min-w-full min-w-96 flex-col justify-center items-center px-6 py-12 lg:px-8 md:mt-20">
                 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -51,27 +57,29 @@
                 </div>
             </div>
         </div>
-
-        <div class="flex-col justify-center min-h-full min-w-full py-12 md:mt-4">
-           
-                @foreach ( $tareas as $tarea )
-
-                    <div class="flex w-full  items-center justify-between px-5 py-4 m-2 shadow shadow-gray-200">
-                        <div class="items-center">
-                            <a href="{{ route('edit-todos', ['id' => $tarea->id ]) }}">{{ $tarea->title }}</a>
-                        </div>
-
-                        <div class="items-center">
-                            <form action="{{ route('destroy-todos', [$tarea->id]) }}" method="POST">
-                                @method('DELETE')
-                                @csrf
-                                <button class="flex justify-center rounded-md bg-gray-800 px-1 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">Eliminar</button>
-                            </form>
-                        </div>
-                    </div>
-
-                @endforeach
+        
+        @if ($tareas)
+            <div class="flex-col justify-center min-h-full min-w-full py-12 md:mt-4">
             
-        </div>
+                    @foreach ( $tareas as $tarea )
+
+                        <div class="flex w-full  items-center justify-between px-5 py-4 m-2 shadow shadow-gray-200">
+                            <div class="items-center">
+                                <a href="{{ route('edit-todos', ['id' => $tarea->id ]) }}">{{ $tarea->title }}</a>
+                            </div>
+
+                            <div class="items-center">
+                                <form action="{{ route('destroy-todos', [$tarea->id]) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="flex justify-center rounded-md bg-gray-800 px-1 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">Eliminar</button>
+                                </form>
+                            </div>
+                        </div>
+
+                    @endforeach
+                
+            </div>
+        @endif
     </div>
 @endsection

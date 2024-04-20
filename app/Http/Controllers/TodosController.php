@@ -15,6 +15,11 @@ class TodosController extends Controller
      * edit para mostrar el formulario de edicion
      */
 
+    public function index(){
+        $todos = Todo::all();
+        return view('tareas.index', [ 'tareas' => $todos ]);
+    }
+
     public function store(Request $request){
 
         // Valida que los campos esten bien
@@ -27,11 +32,6 @@ class TodosController extends Controller
         $todo->save();
 
         return redirect()->route('nombre-todos')->with('success', 'Tarea creada correctamente!');
-    }
-
-    public function index(){
-        $todos = Todo::all();
-        return view('tareas.index', [ 'tareas' => $todos ]);
     }
 
     public function show($id){
