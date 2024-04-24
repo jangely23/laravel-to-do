@@ -58,7 +58,7 @@
                             </div>
 
                             <div class="mb-2 ">
-                                <x-button_primary> {{__('Crear categoria')}} </x-button_primary>
+                                <x-buttons.button-primary> {{__('Crear categoria')}} </x-buttons.button-primary>
                             </div>
                         </form>
                     </div>
@@ -87,7 +87,7 @@
                                 Eliminar
                             </button> -->
 
-                            <x-button_danger data-modal-target="modal-{{ $categoria->id }}"> {{ __('Eliminar') }} </x-button_danger>
+                            <x-buttons.button-danger data-modal-target="modal-{{ $categoria->id }}"> {{ __('Eliminar') }} </x-buttons.button-danger>
                 
                         </div>
                     </div>
@@ -121,27 +121,17 @@
                                 </div>
                                 </div>
                                 <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                    <form action="{{ route('categorias.destroy', [$categoria->id]) }}" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                       
-                                        <x-button_danger> {{ __('Aceptar') }} </x-button_danger>
-                                    </form>
                                     
-                                    <x-button_secondary type="button"  data-close-button="modal-{{ $categoria->id }}"> {{ __('Cancelar') }} </x-button_secondary>
+                                    <x-buttons.button_danger route="{{ route('categorias.destroy', [$categoria->id]) }}" methodForm="POST" methodController="DELETE"> 
+                                        {{ __('Aceptar') }}
+                                    </x-buttons.button_danger>
+                                    
+                                    <x-buttons.button_secondary type="button"  data-close-button="modal-{{ $categoria->id }}"> {{ __('Cancelar') }} </x-buttons.button_secondary>
                                 </div>
                             </div>
                             </div>
                         </div>
                         </div>
-
-
-
-
-
-
-
-
 
                 @endforeach
 

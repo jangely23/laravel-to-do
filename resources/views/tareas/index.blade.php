@@ -46,33 +46,26 @@
                             <div class="mb-2 pb-2">
                                 <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Título tarea</label>
                                 <div class="mt-2">
+                                    <input type="hidden" name="user_id" value="{{ $user['id'] }}">
+
                                     <input id="title" name="title" type="text" autocomplete="title" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-3">
                                 </div>
                             </div>
 
-                            <div class="mb-2 pb-2">
-                                <label for="category_id" class="block text-sm font-medium leading-6 text-gray-900">Categoria</label>
-                                <select name="category_id" class="px-4 py-3 border-none w-full" id="category_id">
-                                    @foreach ($categorias as $categoria )
-                                        <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            <x-forms.select-field name="category_id" id="category_id" label="Categoria">
+                                @foreach ($categorias as $categoria )
+                                    <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
+                                @endforeach 
+                            </x-forms.select-field>
 
-                            <div class="mb-2 pb-2">
-                                <label for="priority_id" class="block text-sm font-medium leading-6 text-gray-900">Prioridad</label>
-                                <div class="mt-2">
-                                    <select name="priority_id" class="px-4 py-3 border-none w-full" id="priority_id">
-                                        @foreach ($prioridades as $prioridad )
-                                            <option value="{{ $prioridad->id }}">{{ $prioridad->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+                            <x-forms.select-field name="priority_id" id="priority_id" label="Prioridad">
+                                @foreach ($prioridades as $prioridad)
+                                    <option value="{{ $prioridad->id }}">{{ $prioridad->name }}</option>
+                                @endforeach
+                            </x-forms.select-field>
 
-                            <div class="mb-2 ">
-                                <x-button_primary> {{__('Guardar nueva tarea')}} </x-button_primary>
-                            </div>
+                            <x-buttons.button-primary> {{__('Guardar nueva tarea')}} </x-buttons.button-primary>
+                            
                         </form>
                     </div>
                 </div>
@@ -87,15 +80,11 @@
                             <div class="items-center">
                                 <a href="{{ route('edit-todos', ['id' => $tarea->id ]) }}">{{ $tarea->title }}</a>
                             </div>
-
-                            <div class="items-center">
-                                <form action="{{ route('destroy-todos', [$tarea->id]) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    
-                                    <x-button_danger> {{ __('Eliminar') }} </x-button_danger>
-                                </form>
-                            </div>
+                            
+                            <x-buttons.button-danger-form :routeName="'destroy-todos'" :routeParams="[$tarea->id]" :methodForm="'POST'" :methodController="'DELETE'"> 
+                                {{ __('Eliminar') }} 
+                            </x-buttons.button-danger-form>
+                                
                         </div>
 
                     @endforeach

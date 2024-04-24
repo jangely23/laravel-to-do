@@ -22,11 +22,13 @@ class TodosController extends Controller
         $categorias = Categoria::all();
         $prioridades = Priorities::all();
 
+        $user = include(resource_path('data\data.php'));
+
         if($todos->isEmpty()){
             $todos=false;
         }
 
-        return view('tareas.index', [ 'tareas' => $todos, 'categorias' => $categorias, 'prioridades' => $prioridades ]);
+        return view('tareas.index', [ 'tareas' => $todos, 'categorias' => $categorias, 'prioridades' => $prioridades, 'user' => $user['user'] ]);
     }
 
     public function store(Request $request){
@@ -36,12 +38,14 @@ class TodosController extends Controller
             'title' => 'required|min:4',
             'category_id' => 'integer',
             'priority_id' => 'integer|required',
+            'user_id' => 'integer|required',
         ]);
 
         $todo = new Todo();
         $todo->title = $request->title;
         $todo->category_id = $request->category_id;
         $todo->priority_id = $request->priority_id;
+        $todo->user_id = $request->user_id;
         $todo->save();
 
         return redirect()->route('nombre-todos')->with('success', 'Tarea creada correctamente!');
