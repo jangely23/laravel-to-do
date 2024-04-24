@@ -1,16 +1,20 @@
 @extends('app') 
 
 @section('content')
-  
-    <div class="container grid md:grid-cols-2 grid-cols-1 gap-4">
-        <div class="flex justify-center items-center min-h-full ">
-            <div class="sm:max-h-auto max-h-full rounded shadow-lg shadow-gray-300 xs:min-w-full min-w-96 flex-col justify-center items-center px-6 py-12 lg:px-8 md:mt-20">
+
+    @if ($categorias)
+        <div class="container grid md:grid-cols-2 grid-cols-1 gap-4 sticky top-0">
+    @else
+        <div class="container min-w-full">
+    @endif
+        <div class="flex justify-center min-h-full ">
+           <div class="sm:max-h-auto  max-h-full rounded shadow-lg shadow-gray-300 xs:min-w-full min-w-96 flex-col justify-center items-center px-6 py-12 lg:px-8 md:mt-20">
                 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                     <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Mis tareas</h2>
                 </div>
 
                 <div class="my-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form class="space-y-6" action="{{ route('categorias.update', ['id' => $categoria->id ]) }}" method="POST">
+                    <form class="space-y-6" action="{{ route('categorias.update', ['categoria' => $categoria->id ]) }}" method="POST">
                         @method('PATCH')
                         @csrf
 
@@ -60,5 +64,30 @@
             </div>
         </div>
     </div>
+
+
+    @if ($categorias->todos->count() > 0)
+        <div class="flex-col justify-center min-h-full min-w-full py-12 md:mt-4 ">
+                
+            @foreach ( $tareas as $tarea )
+
+                <div class="flex w-full  items-center justify-between px-5 py-4 m-2 shadow shadow-gray-200">
+                    <div class="items-center">
+                        <a href="{{ route('edit-todos', ['id' => $tarea->id ]) }}">{{ $tarea->title }}</a>
+                    </div>
+
+                    <div class="items-center">
+                        <form action="{{ route('destroy-todos', [$tarea->id]) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button class="flex justify-center rounded-md bg-gray-800 px-1 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+
+            @endforeach
+        
+        </div>
+     @endif
 
 @endsection

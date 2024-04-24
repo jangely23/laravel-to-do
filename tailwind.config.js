@@ -4,6 +4,7 @@ import aspectRatio from '@tailwindcss/aspect-ratio';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
@@ -11,6 +12,9 @@ export default {
   ],
   theme: {
     extend: {},
+    data: {
+      checked: 'ui~="checked"',
+    },
   },
   plugins: [
     typography,

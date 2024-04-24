@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Todo;
 
-class Categoria extends Model
+class priorities extends Model
 {
     use HasFactory;
-    
+
     public function todos(){
         return $this->hasMany(Todo::class);
     }

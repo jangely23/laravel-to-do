@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('todos', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->timestamps();
-            $table->timestamp('started-at')->nullable();
-            $table->timestamp('finished-at')->nullable();
+        Schema::table('todos', function (Blueprint $table) {
+            $table->unsignedBigInteger('priority_id');
+            $table->foreign('priority_id')->references('id')->on('priorities');
         });
     }
 
@@ -25,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('todos');
+        Schema::table('todos', function (Blueprint $table) {
+            //
+        });
     }
 };
