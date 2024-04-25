@@ -7,4 +7,6 @@ INSERT INTO priorities (name, description) VALUES
 
 INSERT INTO todos (title, category_id, priority_id, updated_at, created_at) VALUES ('bañar perro', 3, 2, '2024-04-24 02:59:50', '2024-04-24 02:59:50');
 
-INSERT INTO users (name,)
+INSERT INTO users (name, email, password) VALUES ('Jess', 'jeyaleonel@gmail.com', '123456789');
+
+UPDATE priorities SET color="#FF9F00" WHERE id='1';

@@ -18,17 +18,31 @@ class TodosController extends Controller
      */
 
     public function index(){
-        $todos = Todo::all();
+        // se debe obtener de la sesion
+        $user = include(resource_path('data\data.php'));
+        
+        $todos = Todo::where('user_id', $user['user1']['id'])
+                        ->with('categorias', 'priorities')
+                        ->orderBy('status')
+                        ->orderBy('priority_id')
+                        ->orderBy('category_id')
+                        ->get();
         $categorias = Categoria::all();
         $prioridades = Priorities::all();
-
-        $user = include(resource_path('data\data.php'));
 
         if($todos->isEmpty()){
             $todos=false;
         }
 
-        return view('tareas.index', [ 'tareas' => $todos, 'categorias' => $categorias, 'prioridades' => $prioridades, 'user' => $user['user'] ]);
+        return view(
+            'tareas.index', 
+            [ 
+              'tareas' => $todos, 
+              'categorias' => $categorias, 
+              'prioridades' => $prioridades, 
+              'user' => (object)$user['user1'] 
+            ]
+        );
     }
 
     public function store(Request $request){
@@ -53,7 +67,16 @@ class TodosController extends Controller
 
     public function show($id){
         $todo = Todo::find($id);
-        return view('tareas.show', [ 'tarea' => $todo ]);
+        $categorias = Categoria::all();
+        $prioridades = Priorities::all();
+
+        return view(
+            'tareas.show', 
+            [ 
+                'tarea' => $todo,
+                'categorias' => $categorias, 
+                'prioridades' => $prioridades
+        ]);
     }
 
     public function update(Request $request, $id){

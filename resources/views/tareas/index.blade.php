@@ -1,95 +1,111 @@
-@extends('app') {{-- Importa la plantilla base --}}
+<x-template-two-columns :varContent='$tareas'>
+    <x-forms.view-create :name="'Mis tareas'" :action="'nombre-todos'">
 
-@section('content') {{-- abre una seccion --}}
-
-    @if ($tareas)
-        <div class="container grid md:grid-cols-2 grid-cols-1 gap-4">
-            
-    @else
-        <div class="container min-w-full">
-    @endif 
-            <div class="flex justify-center items-top h-auto  sticky top-0">
-                <div class="sm:max-h-auto max-h-full rounded shadow-lg shadow-gray-300 xs:min-w-full min-w-96 flex-col justify-center items-center px-6 py-12 lg:px-8 md:mt-20">
-                    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Mis tareas</h2>
-                    </div>
-
-                    <div class="my-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                        <form class="space-y-6" action="{{ route('nombre-todos') }}" method="POST" >
-                            @csrf
-
-                            @if (session('success'))
-
-                                <div id="alert-21" class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-                                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                                    </svg>
-                                    <span class="sr-only">Success</span>
-                                    <div class="ms-3 text-sm font-medium">
-                                        {{ session('success') }}
-                                    </div>
-                                </div>
-                            @endif
-
-                            @error('title')
-                                <div id="alert-2" class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                                    </svg>
-                                    <span class="sr-only">Danger</span>
-                                    <div class="ms-3 text-sm font-medium">
-                                        {{ $message }}
-                                    </div>
-                                </div>
-                            @enderror
-
-                            <div class="mb-2 pb-2">
-                                <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Título tarea</label>
-                                <div class="mt-2">
-                                    <input type="hidden" name="user_id" value="{{ $user['id'] }}">
-
-                                    <input id="title" name="title" type="text" autocomplete="title" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-3">
-                                </div>
-                            </div>
-
-                            <x-forms.select-field name="category_id" id="category_id" label="Categoria">
-                                @foreach ($categorias as $categoria )
-                                    <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
-                                @endforeach 
-                            </x-forms.select-field>
-
-                            <x-forms.select-field name="priority_id" id="priority_id" label="Prioridad">
-                                @foreach ($prioridades as $prioridad)
-                                    <option value="{{ $prioridad->id }}">{{ $prioridad->name }}</option>
-                                @endforeach
-                            </x-forms.select-field>
-
-                            <x-buttons.button-primary> {{__('Guardar nueva tarea')}} </x-buttons.button-primary>
-                            
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
-        @if ($tareas)
-            <div class="flex-col justify-center min-h-full min-w-full py-12 md:mt-4 ">
-            
-                    @foreach ( $tareas as $tarea )
-
-                        <div class="flex w-full  items-center justify-between px-5 py-4 m-2 shadow shadow-gray-200">
-                            <div class="items-center">
-                                <a href="{{ route('edit-todos', ['id' => $tarea->id ]) }}">{{ $tarea->title }}</a>
-                            </div>
-                            
-                            <x-buttons.button-danger-form :routeName="'destroy-todos'" :routeParams="[$tarea->id]" :methodForm="'POST'" :methodController="'DELETE'"> 
-                                {{ __('Eliminar') }} 
-                            </x-buttons.button-danger-form>
-                                
-                        </div>
-
-                    @endforeach
-                
-            </div>
+        @if (session('success'))
+            <x-forms.success-alert id="alert-21"> 
+                {{ session('success') }}
+            </x-forms.success-alert>
         @endif
-    </div>
-@endsection
+
+        @error('title')
+            <x-forms.error-alert id="alert-2" >
+                    {{ $message }}
+            </x-forms.error-alert>
+        @enderror
+
+        <input type="hidden" name="user_id" value="{{ $user->id }}">
+
+        <x-forms.input-field :name="'title'" :type="'text'"> {{ __('Título tarea') }}</x-forms.input-field>
+
+        <x-forms.select-field name="category_id" id="category_id" label="Categoria"  required>
+            @foreach ($categorias as $categoria )
+                <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
+            @endforeach 
+        </x-forms.select-field>
+
+        <x-forms.select-field name="priority_id" id="priority_id" label="Prioridad"  required>
+            @foreach ($prioridades as $prioridad)
+                <option value="{{ $prioridad->id }}">{{ $prioridad->name }}</option>
+            @endforeach
+        </x-forms.select-field>
+
+        <x-buttons.button-primary> {{__('Guardar nueva tarea')}} </x-buttons.button-primary>
+                
+    </x-forms.view-create>
+            
+    @if ($tareas)
+        <x-tables.template-table>
+            <x-tables.head>
+                <div >
+                    <span>{{__('Prioridad')}}</span>
+                </div>
+
+                <div >
+                    <span>{{__('Tarea')}}</span>
+                </div>
+
+                <div >
+                    <span>{{__('Categoria')}}</span>
+                </div>
+
+                <div >
+                    <span>{{__('Acción')}}</span>
+                </div>                        
+            </x-tables.head>
+        
+            @foreach ( $tareas as $tarea )
+            
+                <x-tables.head-mobile>
+                    <div>
+                        <span>{{__('Prioridad')}}</span>
+                    </div>
+
+                    <div>
+                        <span>{{__('Tarea')}}</span>
+                    </div>
+
+                    <div>
+                        <span>{{__('Categoria')}}</span>
+                    </div>
+
+                    <div>
+                        <span>{{__('Acción')}}</span>
+                    </div>                        
+                </x-tables.head-mobile>
+
+                <x-tables.content>
+
+                    <div class="text-xs font-semibold" style="color: {{ $tarea->priorities->color }}">
+                        <span>{{__( $tarea->priorities->name )}}</span>
+                    </div>
+                    
+                    <div>  
+                        <a href="{{ route('show-todos', ['id' => $tarea->id ]) }}" >{{ __($tarea->title) }}</a>    
+                    </div>
+
+                    <div>
+                        <span class="text-xs text-wrap text-white px-2 py-1 rounded-md" style="background-color: {{ $tarea->categorias->color }}">{{ __($tarea->categorias->name) }}</span>
+                    </div>
+                    
+                    <x-buttons.button-danger data-modal-target="modal-{{ $tarea->id }}"> {{ __('Eliminar') }} </x-buttons.button-danger>                    
+                        
+                </x-tables.content>
+
+                <!-- Modal Alerta Delete -->
+                <x-modals.alert-delete :identifier="$tarea->id" 
+                    :action="'¡Eliminar tarea!'" :message="'Este proceso borrara de forma permanente la tarea seleccionada, sin opción de recuperación. ¿Desea continuar?'" >
+                                    
+                    <x-buttons.button-danger-form :routeName="'destroy-todos'" :routeParams="$tarea->id" :methodForm="'POST'" :methodController="'DELETE'"> 
+                        {{ __('Aceptar') }}
+                    </x-buttons.button-danger-form>
+                    
+                    <x-buttons.button-secondary type="button"  data-close-button="modal-{{ $tarea->id }}"> {{ __('Cancelar') }} </x-buttons.button-secondary>
+                
+                </x-modals.alert-delete>
+            
+            @endforeach
+            
+        </x-tables.template-table>
+    @endif
+</x-template-two-columns>
+

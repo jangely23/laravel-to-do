@@ -1,31 +1,29 @@
-@extends('app') {{-- Importa la plantilla base --}}
 
-@section('content') {{-- abre una seccion --}}
-    <div class="container max-w-full ">
-        <div class="flex justify-center min-h-full ">
-            <div class="sm:max-h-auto  max-h-full rounded shadow-lg shadow-gray-300 xs:min-w-full min-w-96 flex-col justify-center items-center px-6 py-12 lg:px-8 md:mt-20">
-                <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Mis tareas</h2>
-                </div>
+<x-forms.view-show :title="'Mis tareas'"
+:routeName="'update-todos'"  :routeParams="$tarea->id" :methodForm="'POST'" :methodController="'PATCH'">
 
-                <div class="my-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form class="space-y-6" action="{{ route('update-todos', ['id' => $tarea->id ]) }}" method="POST" >
-                        @method('PATCH')
-                        @csrf
+    <x-forms.input-field :name="'title'" :type="'text'" :value="$tarea->title"  required>
+        {{ __('Título tarea') }}
+    </x-forms.input-field>
 
-                        <div class="mb-2 pb-2">
-                            <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Título tarea</label>
-                            <div class="mt-2">
-                                <input id="text" name="title" type="title" autocomplete="title" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-3" value="{{ $tarea->title }}">
-                            </div>
-                        </div>
+    <x-forms.select-field name="category_id" id="category_id" label="Categoria"  required>
+        @foreach ($categorias as $categoria )
+            <option value="{{ $categoria->id }}" {{ ($categoria->id == $tarea->category_id) ? 'selected' : '' }}
+            >
+                {{ $categoria->name }}
+            </option>
+        @endforeach 
+    </x-forms.select-field>
 
-                        <div class="mb-2 ">
-                            <button type="submit" class="flex w-full justify-center rounded-md bg-gray-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">Actualizar tarea</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
+    <x-forms.select-field name="priority_id" id="priority_id" label="Prioridad"  required>
+        @foreach ($prioridades as $prioridad)
+            <option value="{{ $prioridad->id }}" {{ ($prioridad->id == $tarea->priority_id) ? 'selected' : '' }}>
+                {{ $prioridad->name }}
+            </option>
+        @endforeach
+    </x-forms.select-field>
+    
+    <x-buttons.button-primary >{{ __('Actualizar tarea') }}</x-buttons.button-primary>
+        
+</x-forms.view-show>
+

@@ -12,7 +12,7 @@ Route::get('/tareas', [TodosController::class, 'index'])->name('nombre-todos');
 
 Route::post('/tareas', [TodosController::class, 'store'])->name('nombre-todos');
 
-Route::get('/tareas/{id}', [TodosController::class, 'show'])->name('edit-todos');
+Route::get('/tareas/{id}', [TodosController::class, 'show'])->name('show-todos');
 
 Route::patch('/tareas/{id}', [TodosController::class, 'update'])->name('update-todos');
 
