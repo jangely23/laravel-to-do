@@ -1,4 +1,4 @@
-<div class="items-center ">
+<div class="items-center">
     <form action="{{ route($routeName, $routeParams) }}" method="{{ $methodForm }}" class="sm:w-full ">
         @method($methodController)
         @csrf

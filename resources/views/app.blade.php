@@ -49,7 +49,7 @@
                     <div class="hidden xs:ml-6 sm:block mx-auto items-center justify-center">
                       <div class="flex space-x-4 ">
                         <a href="{{ route('inicio') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ __('Inicio') }}</a>
-                        <a href="{{ route('nombre-todos') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ __('Tareas') }}</a>
+                        <a href="{{ route('tareas.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ __('Tareas') }}</a>
                         <a href="{{ route('categorias.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ __('Categorias') }}</a>
                       </div>
                     </div>
@@ -70,7 +70,7 @@
               <div class="sm:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pb-3 pt-2">
                   <a href="{{ route('inicio') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ __('Inicio') }}</a>
-                  <a href="{{ route('nombre-todos') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ __('Tareas') }}</a>
+                  <a href="{{ route('tareas.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ __('Tareas') }}</a>
                   <a href="{{ route('categorias.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ __('Categorias') }}</a>
                 </div>
               </div>

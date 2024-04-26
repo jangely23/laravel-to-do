@@ -30,10 +30,6 @@ class TodosController extends Controller
         $categorias = Categoria::all();
         $prioridades = Priorities::all();
 
-        if($todos->isEmpty()){
-            $todos=false;
-        }
-
         return view(
             'tareas.index', 
             [ 
@@ -45,14 +41,32 @@ class TodosController extends Controller
         );
     }
 
+    public function create()
+    {   
+        // se debe obtener de la sesion
+        $user = include(resource_path('data\data.php'));
+        $categorias = Categoria::all();
+        $prioridades = Priorities::all();
+
+        return view(
+            'tareas.create',
+            [ 
+                'categorias' => $categorias, 
+                'prioridades' => $prioridades, 
+                'user' => (object)$user['user1'] 
+            ]
+        );
+    }
+
     public function store(Request $request){
 
         // Valida que los campos esten bien
         $request->validate([
-            'title' => 'required|min:4',
-            'category_id' => 'integer',
+            'title' => 'string|required|min:4',
+            'category_id' => 'integer|required',
             'priority_id' => 'integer|required',
             'user_id' => 'integer|required',
+            'description' => 'string|nullable|min:10',
         ]);
 
         $todo = new Todo();
@@ -60,9 +74,10 @@ class TodosController extends Controller
         $todo->category_id = $request->category_id;
         $todo->priority_id = $request->priority_id;
         $todo->user_id = $request->user_id;
+        $todo->description = $request->description;
         $todo->save();
 
-        return redirect()->route('nombre-todos')->with('success', 'Tarea creada correctamente!');
+        return redirect()->route('tareas.index')->with('success', 'Tarea creada correctamente!');
     }
 
     public function show($id){
@@ -81,20 +96,27 @@ class TodosController extends Controller
 
     public function update(Request $request, $id){
         $todo = Todo::find($id);
-        $todo->title = $request->title;
-        $todo->category_id = $request->category_id;
-        $todo->priority_id = $request->priority_id;
+
+        if($request->status){
+            $todo->status = $request->status;
+        }else{
+            $todo->title = $request->title;
+            $todo->category_id = $request->category_id;
+            $todo->priority_id = $request->priority_id;
+            $todo->description = $request->description;
+        }
+        
         $todo->save();
 
         /* dd($todo); */// permite hacer debug
 
-        return redirect()->route('nombre-todos')->with('success', 'Tarea actualizada!');
+        return redirect()->route('tareas.index')->with('success', 'Tarea actualizada!');
     }
 
     public function destroy($id){
         $todo = Todo::find($id);
         $todo->delete();
 
-        return redirect()->route('nombre-todos')->with('success', 'Tarea eliminada exitosamente!');
+        return redirect()->route('tareas.index')->with('success', 'Tarea eliminada exitosamente!');
     }
 }
