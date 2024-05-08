@@ -4,9 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodosController;
 use App\Http\Controllers\CategoriaController;
 
-Route::get('/', function () {
-    return view('app');
-})->name('inicio');
+Route::get('/', [CategoriaController::class, 'index'])->name('inicio');
 
 /* Route::get('/tareas',           [TodosController::class, 'index']  )->name('nombre-todos');
 Route::post('/tareas',          [TodosController::class, 'store']  )->name('store-todos');

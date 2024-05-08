@@ -1,4 +1,6 @@
+@props(['colorhex'])
 <div class="
+   rounded 
    grid 
    md:grid-cols-auto 
    md:grid-flow-col 
@@ -12,6 +14,8 @@
    mx-2 
    shadow 
    shadow-gray-200"
+
+   style="background-image: linear-gradient(to bottom right, {{ $colorhex }} 50%, {{ $colorhex.'99' }} 100% );" 
 >
 
    {{ $slot }}

@@ -1,13 +1,10 @@
 <x-template-one-column>  
     
-    <div class="flex justify-center items-center mt-6 pt-4 px-4">
-        <div class="flex justify-between md:w-4/5">
-            <h2 class="py-1 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">{{ __('Mis tareas') }}</h2>
-            <x-buttons.button-primary>
-                <a href="{{route('tareas.create')}}" >{{ __('Agregar nueva tarea') }}</a>
-            </x-buttons.button-primary>
-        </div>
-    </div>
+    <x-text.title-buttom :title="'Tareas'">    
+        <x-buttons.button-primary>
+            <a href="{{route('tareas.create')}}" >{{ __('Nueva tarea') }}</a>
+        </x-buttons.button-primary>
+    </x-text.title-buttom>
 
     @if (count($tareas))
         <x-tables.template-table>

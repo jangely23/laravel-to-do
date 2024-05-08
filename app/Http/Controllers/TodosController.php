@@ -105,10 +105,13 @@ class TodosController extends Controller
             $todo->priority_id = $request->priority_id;
             $todo->description = $request->description;
         }
-        
+
         $todo->save();
 
-        /* dd($todo); */// permite hacer debug
+        if($request->categoria_id != '0'){
+            
+            return redirect()->route('categorias.show', ['categoria' =>$request->categoria_id])->with('success', 'Tarea actualizada!');
+        }
 
         return redirect()->route('tareas.index')->with('success', 'Tarea actualizada!');
     }

@@ -53,8 +53,8 @@ class CategoriaController extends Controller
      */
     public function show(string $id)
     {
-        $categoria = Categoria::find($id);
-
+        $categoria = Categoria::with('todos')->find($id);
+       
         return view('categorias.show', ['categoria'=> $categoria]);
     }
 

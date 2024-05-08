@@ -2,7 +2,7 @@
 
 @section('content') {{-- abre una seccion --}}
 
-    <div class="container min-w-full">
+    <div class="w-full">
 
         {{ $slot }}
 

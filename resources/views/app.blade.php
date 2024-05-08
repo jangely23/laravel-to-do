@@ -16,9 +16,9 @@
 
     <body class="h-full">
         <header>
-            <nav class="bg-gray-800">
-              <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                <div class="relative flex h-16 items-center justify-between">
+            <nav class="shadow-md">
+              <div class="mx-auto max-w-7xl px-1 sm:px-6 lg:px-8">
+                <div class="relative flex h-12 items-center justify-between">
                   <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <!-- Mobile menu button-->
                     <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
@@ -48,9 +48,8 @@
                     </div>
                     <div class="hidden xs:ml-6 sm:block mx-auto items-center justify-center">
                       <div class="flex space-x-4 ">
-                        <a href="{{ route('inicio') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ __('Inicio') }}</a>
-                        <a href="{{ route('tareas.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ __('Tareas') }}</a>
-                        <a href="{{ route('categorias.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ __('Categorias') }}</a>
+                        <a href="{{ route('tareas.index') }}" class="text-gray-800 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ __('Tareas') }}</a>
+                        <a href="{{ route('categorias.index') }}" class="text-gray-800 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ __('Categorias') }}</a>
                       </div>
                     </div>
                   </div>
@@ -69,9 +68,8 @@
               <!-- Mobile menu, show/hide based on menu state. -->
               <div class="sm:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pb-3 pt-2">
-                  <a href="{{ route('inicio') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ __('Inicio') }}</a>
-                  <a href="{{ route('tareas.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ __('Tareas') }}</a>
-                  <a href="{{ route('categorias.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ __('Categorias') }}</a>
+                  <a href="{{ route('tareas.index') }}" class="text-gray-800 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ __('Tareas') }}</a>
+                  <a href="{{ route('categorias.index') }}" class="text-gray-800 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ __('Categorias') }}</a>
                 </div>
               </div>
             </nav>

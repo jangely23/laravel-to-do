@@ -24,7 +24,6 @@
         </x-forms.select-field>
         
         <x-buttons.button-primary >{{ __('Actualizar tarea') }}</x-buttons.button-primary>
-            
     </x-forms.view-show>
 </x-template-one-column> 
 

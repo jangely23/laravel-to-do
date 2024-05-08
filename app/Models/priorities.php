@@ -11,7 +11,7 @@ class priorities extends Model
     use HasFactory;
 
     public function todos(){
-        return $this->hasMany(Todo::class);
+        return $this->hasMany(Todo::class,'priority_id');
     }
 
 }
